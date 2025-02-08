@@ -1,0 +1,36 @@
+@use './variables' as *;
+
+@mixin phone {
+  @media (max-width: $phone-width) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: $tablet-width) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (max-width: $desktop-width) {
+    @content;
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-right {
+  display: flex;
+  justify-content: right;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
