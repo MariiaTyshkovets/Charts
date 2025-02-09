@@ -1,0 +1,1 @@
+import{C as o,Y as p,u as n}from"./chunk-32HZZRH4.js";var i=class t{title="charts";ngOnInit(){}static \u0275fac=function(e){return new(e||t)};static \u0275cmp=n({type:t,selectors:[["app-root"]],decls:1,vars:0,template:function(e,s){e&1&&o(0,"router-outlet")},dependencies:[p],encapsulation:2})};export{i as a};

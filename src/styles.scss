@@ -1,4 +1,8 @@
-@use 'assets/styles/reset.scss' as *;
-@use 'assets/styles/variables' as *;
-@use 'assets/styles/mixins' as *;
-@use 'assets/styles/typography' as *;
+@use "assets/styles/reset.scss" as *;
+@use "assets/styles/variables" as *;
+@use "assets/styles/mixins" as *;
+@use "assets/styles/typography" as *;
+
+body {
+  font-family: "Noto Sans", sans-serif;
+}

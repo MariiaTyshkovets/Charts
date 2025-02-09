@@ -1,0 +1,18 @@
+@if (isLoading) {
+<div class="loader-wrapper">
+  <div class="loader"></div>
+</div>
+} @else {
+<div class="main-wrapper">
+  <app-header
+    [instruments]="instruments.data"
+    [selectedInstrument]="selectedInstrument"
+    (instrumentSubscribed)="onInstrumentSubscribed($event)"
+  ></app-header>
+  <app-market-data
+    [selectedInstrument]="selectedInstrument"
+    [selectedBarsCountBack]="selectedBarsCountBack"
+  ></app-market-data>
+  <app-chart [selectedBarsCountBack]="selectedBarsCountBack"></app-chart>
+</div>
+}

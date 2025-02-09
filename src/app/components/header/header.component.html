@@ -1,0 +1,30 @@
+<div class="header-wrapper">
+  <div class="custom-select">
+    <div class="select-wrapper" (click)="toggleDropdown()">
+      <div class="selected-option">
+        {{ selectedInstrument?.description ?? "Select an option" }}
+      </div>
+      <div class="arrow">
+        <span>{{ isDropdownOpen ? '▲' : '▼' }}</span>
+      </div>
+    </div>
+
+    @if (isDropdownOpen) {
+    <div class="dropdown">
+      @for (item of instruments; track item.id) {
+      <div class="dropdown-item" (click)="selectOption(item)">
+        {{ item.description }}
+      </div>
+      }
+    </div>
+    }
+  </div>
+  <div class="subscribe">
+    <button
+      class="custom-btn"
+      type="button"
+      [disabled]="!selectedInstrument"
+      (click)="selectionSubscribed()"
+    >Subscribe</button>
+  </div>
+</div>

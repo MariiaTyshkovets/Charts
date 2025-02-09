@@ -1,0 +1,34 @@
+<div class="market-data-wrapper">
+  <h3>Market Data:</h3>
+  <div class="market-data">
+    <div class="market-data__item">
+      <span>Symbol:</span>
+      @if (selectedBarsCountBack) {
+      <span>{{ selectedInstrument.symbol }}</span>
+      } @else {
+      <span>Not Subscribed</span>
+      }
+    </div>
+    <div class="market-data__item">
+      <span>Price:</span>
+      @if (selectedBarsCountBack) {
+      <span
+        >${{ selectedBarsCountBack[selectedBarsCountBack.length - 1].h }}</span
+      >
+      } @else {
+      <span>Not Subscribed</span>
+      }
+    </div>
+    <div class="market-data__item">
+      <span>Time:</span>
+      @if (selectedBarsCountBack) {
+      <span>{{
+        selectedBarsCountBack[selectedBarsCountBack.length - 1].t
+          | date : "MMM d, h:mm a"
+      }}</span>
+      } @else {
+      <span>Not Subscribed</span>
+      }
+    </div>
+  </div>
+</div>
