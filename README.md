@@ -21,7 +21,7 @@ This project visualizes market data in the form of charts (bar chart). The data 
 1. Clone the repository  
    ```sh
    git clone [<repo_url>](https://github.com/MariiaTyshkovets/charts)
-   cd charts-app
+   cd charts
 2. Install dependencies
    ```sh
    npm install
