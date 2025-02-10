@@ -7,7 +7,7 @@ import { environment } from '../config/environment';
   providedIn: 'root',
 })
 export class ApiService {
-  private api_url = environment.api_url;
+  private api_url = environment.proxy_url;
 
   constructor(private http: HttpClient) {}
 
