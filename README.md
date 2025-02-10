@@ -1,13 +1,13 @@
 # Charts Application  
 
 ## Project Description  
-This project visualizes market data in the form of charts (bar chart). The data is streamed in real-time via the **Fintacharts** API. The project features automatic authentication and token refresh, as well as the ability to subscribe to the selected instrument.  
+This project visualizes market data in the form of charts (bar chart). The data is from **Fintacharts** API. The project features automatic authentication and token refresh, as well as the ability to subscribe to the selected instrument.  
 
 ## Functionality  
 - Fetching market data  
 - Visualization with a **bar chart** (although a candlestick chart might have been more suitable)  
 - Automatic authentication and token refresh  
-- Dynamic data updates after subscription  
+- Changed data updates after subscription  
 - API requests configured to work through **Postman** (locally requires a Chrome extension due to CORS issues)  
 
 ## Technologies  
