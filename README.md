@@ -8,7 +8,7 @@ This project visualizes market data in the form of charts (bar chart). The data 
 - Visualization with a **bar chart** (although a candlestick chart might have been more suitable)  
 - Automatic authentication and token refresh  
 - Changed data updates after subscription  
-- API requests configured to work through **Postman** (locally requires a Chrome extension due to CORS issues)  
+- API requests configured to work through **Postman**
 
 ## Technologies  
 - **Angular 18** (Standalone Components)  
@@ -30,8 +30,6 @@ This project visualizes market data in the form of charts (bar chart). The data 
    ng serve
 
 ## Important Notes
-For the API to work correctly, you'll need to use the [Chrome extension](https://chromewebstore.google.com/detail/moesif-origincors-changer/digfbfaphojjndkpccljibejjbppifbc) to bypass CORS
-Data will update only after subscribing to an instrument
 The bar chart is used for the data visualization, but a candlestick chart might be more appropriate according to the context of the task
 
 ## Links
