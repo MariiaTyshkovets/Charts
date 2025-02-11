@@ -17,6 +17,7 @@ export class AuthService {
 
   constructor(private apiService: ApiService) {
     this.loadTokensFromStorage();
+    this.scheduleTokenRefresh();
 
     effect(() => {
       if (this.tokenExpiration()) {
@@ -71,31 +72,35 @@ export class AuthService {
 
   refreshAuthToken(): Observable<IAuthResponse> {
     const refreshToken = this.refreshToken();
-    if (!refreshToken) {
-      throw new Error('No refresh token available');
-    } else {
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Accept: '*/*',
-        'Accept-Encoding': 'gzip, deflate, br',
-        Connection: 'keep-alive',
-        Authorization: `Bearer ${this.token}`,
-      });
-
-      const body = new HttpParams()
-        .set('grant_type', testUser.grant_type)
-        .set('refresh_token', refreshToken)
-        .set('scope', this.scope() || '')
-        .set('client_id', testUser.client_id);
-
-      return this.apiService
-        .post<IAuthResponse>(
-          '/identity/realms/fintatech/protocol/openid-connect/token',
-          body.toString(),
-          headers
-        )
-        .pipe(tap((response) => this.storeTokens(response)));
+    if (
+      !refreshToken ||
+      !this.tokenExpiration() ||
+      this.tokenExpiration()! < Date.now()
+    ) {
+      this.logout();
+      return new Observable<IAuthResponse>();
     }
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      Authorization: `Bearer ${this.token}`,
+    });
+
+    const body = new HttpParams()
+      .set('grant_type', 'refresh_token')
+      .set('refresh_token', refreshToken)
+      .set('scope', this.scope() || '')
+      .set('client_id', testUser.client_id);
+
+    return this.apiService
+      .post<IAuthResponse>(
+        '/identity/realms/fintatech/protocol/openid-connect/token',
+        body.toString(),
+        headers
+      )
+      .pipe(tap((response) => {
+        this.storeTokens(response);
+        this.scheduleTokenRefresh();
+      }));
   }
 
   private storeTokens(response: IAuthResponse): void {
@@ -144,11 +149,14 @@ export class AuthService {
     }
 
     const expiration = this.tokenExpiration();
-    if (!expiration) return;
+    if (!expiration || expiration < Date.now()) {
+      this.logout();
+      return;
+    }
 
     const now = Date.now();
     const timeUntilExpiration = expiration - now;
-    const refreshTime = timeUntilExpiration - 5 * 60 * 1000; // Оновлення за 5 хв до закінчення
+    const refreshTime = timeUntilExpiration - 3 * 60 * 1000; // Оновлення за 3 хв до закінчення
 
     if (refreshTime > 0) {
       this.refreshTimeoutId = setTimeout(() => {
